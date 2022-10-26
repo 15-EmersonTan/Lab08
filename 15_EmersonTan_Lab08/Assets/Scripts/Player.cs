@@ -2,11 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class Player : MonoBehaviour
 {
     public float speed;
     private float maxY = 4.87f , minY = -2.93f;
+
+    public Text ScoreTxt;
+    public int Score;
+
+    private float scoreInterval = 1f;
+    private float nextScore = 6f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +24,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ScoreTxt.text = "Score: " + Score;
 
         float verticalInput = Input.GetAxis("Vertical");
 
@@ -31,6 +40,11 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(transform.position.x , maxY ,0);
         }
 
+        if(Time.time >= nextScore)
+        {
+            nextScore = Time.time + scoreInterval;
+            Score++;
+        }
     }
     
     public void OnCollisionEnter(Collision other)
