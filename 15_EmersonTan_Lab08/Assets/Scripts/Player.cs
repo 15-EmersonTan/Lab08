@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public float speed;
-    private float maxY = 4.87f , minY = 2.93f;
+    private float maxY = 4.87f , minY = -2.93f;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +26,13 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(transform.position.x , minY ,0);
         }
 
-        else if(transform.position.y > minY)
+        else if(transform.position.y > maxY)
         {
             transform.position = new Vector3(transform.position.x , maxY ,0);
         }
 
     }
+    
     public void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "Obstacle")
